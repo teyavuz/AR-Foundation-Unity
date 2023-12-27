@@ -45,7 +45,22 @@ public class PlaceObject : MonoBehaviour
             {
                 Pose pose = hit.pose;
                 GameObject obj = Instantiate(prefab, pose.position, pose.rotation);
+                
+                if (_arPlaneManager.GetPlane(hit.trackableId).alignment == PlaneAlignment.HorizontalUp)
+                {
+                    Vector3 position = obj.transform.position;
+                    position.y = 0f;
+                    Vector3 cameraPosition = Camera.main.transform.position;
+                    cameraPosition.y = 0f;
+                    Vector3 direction = cameraPosition - position;
+                    Vector3 targetRotationEuler = Quaternion.LookRotation(direction).eulerAngles;
+                    Vector3 scaledEuler = Vector3.Scale(targetRotationEuler, obj.transform.up.normalized); //(0,1, 0)
+                    Quaternion targetRotation = Quaternion.Euler(scaledEuler);
+                    obj.transform.rotation = obj.transform.rotation * targetRotation;
+                }
             }
+
+                
         }
     }
 }
