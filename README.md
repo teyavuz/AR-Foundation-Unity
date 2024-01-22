@@ -28,6 +28,3 @@ This Unity AR project demonstrates the implementation of creating, dragging, and
 
 -   This project was created by [Taha Emre Yavuz] and is open for contributions and feedback.
 
-## License
-
-This Unity AR Project is licensed under the MIT License.
